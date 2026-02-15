@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Regulatory Query Assistant</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+<div class="container mt-5">
+
+    <div class="card shadow p-5">
+
+        <h2 class="text-center mb-4">
+            AI Regulatory Query Assistant
+        </h2>
+
+        <!-- ERROR MESSAGE -->
+        {% if error %}
+            <div class="alert alert-danger text-center">
+                {{ error }}
+            </div>
+        {% endif %}
+
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+
+            <!-- Query Type -->
+            <div class="mb-3">
+                <label class="form-label">Query Type</label>
+
+                <select class="form-select" name="query_type" required>
+                    <option value="">Select Query Type</option>
+                    <option>Safety</option>
+                    <option>Efficacy</option>
+                    <option>Manufacturing</option>
+                    <option>Labeling</option>
+                </select>
+            </div>
+
+            <!-- Upload -->
+            <div class="mb-3">
+                <label class="form-label">
+                    Upload Regulatory Query (PDF, TXT, DOCX)
+                </label>
+
+                <input 
+                    class="form-control"
+                    type="file"
+                    name="file"
+                    accept=".pdf,.txt,.docx"
+                    required
+                    onchange="showFileName(this)"
+                >
+
+                <small id="fileName" class="text-success"></small>
+            </div>
+
+            <div class="text-center">
+                <button class="btn btn-primary btn-lg">
+                    Generate AI Response
+                </button>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script>
+function showFileName(input){
+    const fileName = input.files[0]?.name;
+    document.getElementById("fileName").innerText =
+        fileName ? "Uploaded: " + fileName : "";
+}
+</script>
+
+</body>
+</html>

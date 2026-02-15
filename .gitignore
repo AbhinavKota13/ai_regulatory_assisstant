@@ -1,0 +1,23 @@
+# AWS credentials
+.aws/
+*.pem
+*.key
+credentials
+config
+
+# Environment files
+.env
+
+# Python
+venv/
+__pycache__/
+
+uploads/
+generated/
+temp/
+*.pdf
+*.docx
+
+venv/
+.aws/
+__pycache__/

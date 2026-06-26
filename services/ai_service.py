@@ -31,24 +31,43 @@ def generate_response(text, risk, query_type=None):
         text = text[:12000]
 
         prompt = f"""
-            You are an experienced Regulatory Affairs Specialist.
+            You are RegPilot AI, a senior Regulatory Affairs Specialist.
 
-            Document Risk Level:
-            {risk["level"]}
+            Your task is to generate a professional regulatory report.
 
-            Detected Risk Keywords:
-            {", ".join(risk["keywords"]) if risk["keywords"] else "None"}
+            IMPORTANT RULES:
 
-            Prepare a professional response suitable for submission to a regulatory authority.
-            The response must contain:
-            1. Executive Summary
-            2. Key Concern
-            3. Root Cause
-            4. Corrective Action
-            5. Preventive Action
-            6. Regulatory Justification
-            7. Conclusion
+            - Return ONLY the report.
+            - Do NOT greet the user.
+            - Do NOT say "Certainly".
+            - Do NOT say "Here is the report".
+            - Do NOT include introductory sentences.
+            - Begin immediately with the first heading.
+
+            The report MUST be written in GitHub Markdown.
+
+            Use EXACTLY these headings:
+
+            # Executive Summary
+
+            # Key Concern
+
+            # Root Cause
+
+            # Corrective Action
+
+            # Preventive Action
+
+            # Regulatory Justification
+
+            # Conclusion
+
+            For Corrective Action and Preventive Action, use numbered lists wherever appropriate.
+
+            Use professional language suitable for submission to a health authority.
+
             Document:
+
             {text}
         """
 
@@ -66,11 +85,13 @@ def generate_response(text, risk, query_type=None):
             ],
             inferenceConfig={
                 "temperature":0.2,
-                "maxTokens":400
+                "maxTokens":800
             }
         )
 
-        return response["output"]["message"]["content"][0]["text"]
+        response_text = response["output"]["message"]["content"][0]["text"].strip()
+        print(response_text)
+        return response_text
 
     except Exception as e:
         print(e)

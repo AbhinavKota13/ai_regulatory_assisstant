@@ -153,7 +153,7 @@ RegPilot | AI Response
 
     <div class="card-body">
 
-        <pre>{{ response }}</pre>
+        <div id="markdown-response" class="markdown-body">{{ response }}</div>
 
     </div>
 
@@ -183,5 +183,25 @@ RegPilot | AI Response
     </a>
 
 </div>
+
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+    
+    marked.setOptions({
+        breaks: true,
+        gfm: true
+    });
+
+    const container = document.getElementById("markdown-response");
+
+    const markdown = container.textContent.trim();
+
+    container.innerHTML = marked.parse(markdown);
+
+});
+
+</script>
 
 {% endblock %}

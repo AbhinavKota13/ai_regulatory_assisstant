@@ -6,132 +6,148 @@ RegPilot | AI Response
 
 {% block content %}
 
-<h2 class="text-center mb-4 fw-bold">
-    <i class="bi bi-robot"></i> AI Regulatory Response
-</h2>
+<!-- Success Banner -->
 
-<!-- Uploaded Document -->
+<div class="alert alert-success shadow-sm mb-4">
 
-<div class="card shadow-sm mb-4">
+    <i class="bi bi-check-circle-fill"></i>
 
-    <div class="card-header bg-primary text-white">
+    <strong> AI Report Generated Successfully</strong>
 
-        <h5 class="mb-0">
-            <i class="bi bi-file-earmark-text"></i>
-            Uploaded Document
-        </h5>
+    <div class="small text-muted">
 
-    </div>
-
-    <div class="card-body">
-
-        <p>
-
-            <strong>Filename:</strong>
-
-            {{ filename }}
-
-        </p>
-
-        <hr>
-
-        <strong>Preview</strong>
-
-        <pre>{{ preview }}</pre>
+        Generated using Amazon Nova Pro
 
     </div>
 
 </div>
 
 
-<!-- Risk Assessment -->
+<div class="row g-4">
 
-<div class="card shadow-sm mb-4">
+    <!-- Uploaded Document -->
 
-    <div class="card-header bg-warning">
+    <div class="col-lg-6">
 
-        <h5 class="mb-0">
+        <div class="card h-100">
 
-            <i class="bi bi-exclamation-triangle-fill"></i>
+            <div class="card-header bg-primary text-white">
 
-            Risk Assessment
+                <i class="bi bi-file-earmark-text"></i>
 
-        </h5>
+                Uploaded Document
+
+            </div>
+
+            <div class="card-body">
+
+                <p>
+
+                    <strong>Filename</strong><br>
+
+                    {{ filename }}
+
+                </p>
+
+                <hr>
+
+                <strong>Preview</strong>
+
+                <pre>{{ preview }}</pre>
+
+            </div>
+
+        </div>
 
     </div>
 
-    <div class="card-body">
 
-        {% if risk_level == "HIGH" %}
+    <!-- Risk Assessment -->
 
-            <h3 class="text-danger">
+    <div class="col-lg-6">
 
-                🔴 HIGH
+        <div class="card h-100">
 
-            </h3>
+            <div class="card-header bg-warning">
 
-        {% else %}
+                <i class="bi bi-exclamation-triangle-fill"></i>
 
-            <h3 class="text-success">
+                Risk Assessment
 
-                🟢 NORMAL
+            </div>
 
-            </h3>
+            <div class="card-body">
 
-        {% endif %}
+                {% if risk_level=="HIGH" %}
 
-        <hr>
+                    <span class="badge bg-danger fs-6">
 
-        <strong>Detected Keywords</strong>
+                        🔴 HIGH RISK
 
-        {% if risk_keywords %}
+                    </span>
 
-            <ul>
+                {% else %}
 
-                {% for keyword in risk_keywords %}
+                    <span class="badge bg-success fs-6">
 
-                    <li>{{ keyword }}</li>
+                        🟢 NORMAL
 
-                {% endfor %}
+                    </span>
 
-            </ul>
+                {% endif %}
 
-        {% else %}
+                <hr>
 
-            <p>No high-risk keywords detected.</p>
+                <strong>Detected Keywords</strong>
 
-        {% endif %}
+                {% if risk_keywords %}
 
-        <strong>Reason</strong>
+                    <ul>
 
-        <ul>
+                        {% for keyword in risk_keywords %}
 
-            {% for reason in risk_reasons %}
+                        <li>{{ keyword }}</li>
 
-                <li>{{ reason }}</li>
+                        {% endfor %}
 
-            {% endfor %}
+                    </ul>
 
-        </ul>
+                {% else %}
+
+                    <p>No high-risk keywords detected.</p>
+
+                {% endif %}
+
+                <strong>Reason</strong>
+
+                <ul>
+
+                    {% for reason in risk_reasons %}
+
+                    <li>{{ reason }}</li>
+
+                    {% endfor %}
+
+                </ul>
+
+            </div>
+
+        </div>
 
     </div>
 
 </div>
 
 
-<!-- AI Response -->
+<!-- AI REPORT -->
 
-<div class="card shadow mb-4">
+<div class="card mt-4">
 
     <div class="card-header bg-success text-white">
 
-        <h5 class="mb-0">
+        <i class="bi bi-stars"></i>
 
-            <i class="bi bi-stars"></i>
-
-            Generated Regulatory Response
-
-        </h5>
+        AI Regulatory Report
 
     </div>
 
@@ -144,11 +160,11 @@ RegPilot | AI Response
 </div>
 
 
-<!-- Buttons -->
+<div class="text-center mt-4">
 
-<div class="text-center">
+    <a href="/download/{{ pdf_file }}"
 
-    <a href="/download/{{ pdf_file }}" class="btn btn-success btn-lg me-2">
+       class="btn btn-success btn-lg me-2">
 
         <i class="bi bi-download"></i>
 
@@ -156,7 +172,9 @@ RegPilot | AI Response
 
     </a>
 
-    <a href="/" class="btn btn-secondary btn-lg">
+    <a href="/"
+
+       class="btn btn-outline-primary btn-lg">
 
         <i class="bi bi-arrow-repeat"></i>
 

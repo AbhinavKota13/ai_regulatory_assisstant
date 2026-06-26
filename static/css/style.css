@@ -219,3 +219,41 @@ input[type=file]{
     margin-bottom:15px;
 
 }
+
+/* ---------- RESULT PAGE ---------- */
+
+.alert-success{
+
+    border:none;
+
+    border-radius:14px;
+
+}
+
+.badge{
+
+    padding:10px 18px;
+
+    border-radius:10px;
+
+}
+
+.card-header{
+
+    font-size:1rem;
+
+}
+
+.card{
+
+    transition:.25s;
+
+}
+
+.card:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 14px 35px rgba(0,0,0,.08);
+
+}

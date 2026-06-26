@@ -105,3 +105,117 @@ h1,h2,h3,h4,h5{
     font-weight:700;
 
 }
+
+/* ---------- HERO SECTION ---------- */
+
+.hero{
+
+    text-align:center;
+
+    margin-bottom:50px;
+
+}
+
+.hero h1{
+
+    font-size:3rem;
+
+    font-weight:700;
+
+    color:#1e293b;
+
+}
+
+.hero p{
+
+    color:#64748b;
+
+    font-size:1.1rem;
+
+    margin-top:15px;
+
+}
+
+/* ---------- UPLOAD CARD ---------- */
+
+.upload-card{
+
+    max-width:800px;
+
+    margin:auto;
+
+}
+
+/* ---------- DROP AREA ---------- */
+
+.drop-zone{
+
+    border:2px dashed #2563eb;
+
+    border-radius:16px;
+
+    padding:45px;
+
+    text-align:center;
+
+    background:#f8fbff;
+
+    transition:.3s;
+
+}
+
+.drop-zone:hover{
+
+    background:#eef5ff;
+
+}
+
+.drop-zone i{
+
+    font-size:60px;
+
+    color:#2563eb;
+
+}
+
+.drop-zone p{
+
+    margin-top:15px;
+
+    color:#64748b;
+
+}
+
+/* Hide ugly default file input */
+
+input[type=file]{
+
+    display:none;
+
+}
+
+.upload-label{
+
+    cursor:pointer;
+
+}
+
+/* ---------- FEATURE CARDS ---------- */
+
+.feature-card{
+
+    text-align:center;
+
+    padding:25px;
+
+}
+
+.feature-card i{
+
+    font-size:40px;
+
+    color:#2563eb;
+
+    margin-bottom:15px;
+
+}

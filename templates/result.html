@@ -1,75 +1,169 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Generated Response</title>
+{% extends "base.html" %}
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
+{% block title %}
+RegPilot | AI Response
+{% endblock %}
 
-<body class="bg-light">
+{% block content %}
 
-<div class="container mt-5">
+<h2 class="text-center mb-4 fw-bold">
+    <i class="bi bi-robot"></i> AI Regulatory Response
+</h2>
 
-    <div class="card shadow p-4">
-        {% if risk_level == "HIGH" %}
-        <div class="card border-warning shadow-sm mb-4">
-            <div class="card-header bg-warning text-dark">
-                <h5 class="mb-0">
-                    Risk Assessment
-                </h5>
-            </div>
-            <div class="card-body">
-                <h4>
-                    {% if risk_level == "HIGH" %}
-                        🔴 HIGH
-                    {% else %}
-                        🟢 NORMAL
-                    {% endif %}
-                </h4>
-                <hr>
-                <strong>Detected Keywords</strong>
-                <ul>
-                    {% for keyword in risk_keywords %}
-                        <li>{{ keyword }}</li>
-                    {% endfor %}
-                </ul>
-                <strong>Reason</strong>
-                <ul>
-                    {% for reason in risk_reasons %}
-                        <li>{{ reason }}</li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
-        {% else %}
-            <div class="alert alert-success text-center fw-bold">
-                ✅ Standard Regulatory Query
-            </div>
-        {% endif %}
+<!-- Uploaded Document -->
 
-        <div class="alert alert-secondary">
-            <strong>Document Preview (First 5 Lines):</strong>
-            <pre style="white-space: pre-wrap;">{{ preview }}</pre>
-        </div>
+<div class="card shadow-sm mb-4">
 
+    <div class="card-header bg-primary text-white">
 
-        <h3 class="mb-3">Generated Regulatory Response</h3>
+        <h5 class="mb-0">
+            <i class="bi bi-file-earmark-text"></i>
+            Uploaded Document
+        </h5>
 
-        <pre style="white-space: pre-wrap;">{{ response }}</pre>
+    </div>
 
-        <div class="text-center mt-4">
-            <a href="/download/{{ pdf_file }}" class="btn btn-success">
-                Download as PDF
-            </a>
+    <div class="card-body">
 
-            <a href="/" class="btn btn-secondary">
-                Upload Another
-            </a>
-        </div>
+        <p>
+
+            <strong>Filename:</strong>
+
+            {{ filename }}
+
+        </p>
+
+        <hr>
+
+        <strong>Preview</strong>
+
+        <pre>{{ preview }}</pre>
 
     </div>
 
 </div>
 
-</body>
-</html>
+
+<!-- Risk Assessment -->
+
+<div class="card shadow-sm mb-4">
+
+    <div class="card-header bg-warning">
+
+        <h5 class="mb-0">
+
+            <i class="bi bi-exclamation-triangle-fill"></i>
+
+            Risk Assessment
+
+        </h5>
+
+    </div>
+
+    <div class="card-body">
+
+        {% if risk_level == "HIGH" %}
+
+            <h3 class="text-danger">
+
+                🔴 HIGH
+
+            </h3>
+
+        {% else %}
+
+            <h3 class="text-success">
+
+                🟢 NORMAL
+
+            </h3>
+
+        {% endif %}
+
+        <hr>
+
+        <strong>Detected Keywords</strong>
+
+        {% if risk_keywords %}
+
+            <ul>
+
+                {% for keyword in risk_keywords %}
+
+                    <li>{{ keyword }}</li>
+
+                {% endfor %}
+
+            </ul>
+
+        {% else %}
+
+            <p>No high-risk keywords detected.</p>
+
+        {% endif %}
+
+        <strong>Reason</strong>
+
+        <ul>
+
+            {% for reason in risk_reasons %}
+
+                <li>{{ reason }}</li>
+
+            {% endfor %}
+
+        </ul>
+
+    </div>
+
+</div>
+
+
+<!-- AI Response -->
+
+<div class="card shadow mb-4">
+
+    <div class="card-header bg-success text-white">
+
+        <h5 class="mb-0">
+
+            <i class="bi bi-stars"></i>
+
+            Generated Regulatory Response
+
+        </h5>
+
+    </div>
+
+    <div class="card-body">
+
+        <pre>{{ response }}</pre>
+
+    </div>
+
+</div>
+
+
+<!-- Buttons -->
+
+<div class="text-center">
+
+    <a href="/download/{{ pdf_file }}" class="btn btn-success btn-lg me-2">
+
+        <i class="bi bi-download"></i>
+
+        Download PDF
+
+    </a>
+
+    <a href="/" class="btn btn-secondary btn-lg">
+
+        <i class="bi bi-arrow-repeat"></i>
+
+        Upload Another
+
+    </a>
+
+</div>
+
+{% endblock %}

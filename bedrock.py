@@ -3,7 +3,7 @@ import boto3
 client = boto3.client("bedrock-runtime", region_name="us-east-1")
 
 response = client.converse(
-    modelId="add_mode_id",
+    modelId="amazon.nova-pro-v1:0",
     messages=[
         {
             "role": "user",

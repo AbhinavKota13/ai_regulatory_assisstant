@@ -12,8 +12,34 @@
 
     <div class="card shadow p-4">
         {% if risk_level == "HIGH" %}
-        <div class="alert alert-danger text-center fw-bold fs-5">
-            🔴 HIGH PRIORITY — Potential Safety Risk Identified
+        <div class="card border-warning shadow-sm mb-4">
+            <div class="card-header bg-warning text-dark">
+                <h5 class="mb-0">
+                    Risk Assessment
+                </h5>
+            </div>
+            <div class="card-body">
+                <h4>
+                    {% if risk_level == "HIGH" %}
+                        🔴 HIGH
+                    {% else %}
+                        🟢 NORMAL
+                    {% endif %}
+                </h4>
+                <hr>
+                <strong>Detected Keywords</strong>
+                <ul>
+                    {% for keyword in risk_keywords %}
+                        <li>{{ keyword }}</li>
+                    {% endfor %}
+                </ul>
+                <strong>Reason</strong>
+                <ul>
+                    {% for reason in risk_reasons %}
+                        <li>{{ reason }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
         {% else %}
             <div class="alert alert-success text-center fw-bold">

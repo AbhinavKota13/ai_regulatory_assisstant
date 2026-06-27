@@ -328,3 +328,15 @@ input[type=file]{
     border-radius:6px;
     font-size:0.9rem;
 }
+
+.bg-info{
+
+    background:#0ea5e9 !important;
+
+}
+
+.card-body p{
+
+    margin-bottom:0;
+
+}

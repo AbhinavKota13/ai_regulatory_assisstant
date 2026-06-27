@@ -11,14 +11,12 @@ USE_REAL_AI = True
 def mock_regulatory_response(text):
 
     return """
-REGULATORY RESPONSE (Mock Output)
-
-Query Summary:
-...
-
-Conclusion:
-...
-"""
+        REGULATORY RESPONSE (Mock Output)
+        Query Summary:
+        ...
+        Conclusion:
+        ...
+    """
 
 
 def generate_response(text, risk, query_type=None):
@@ -90,7 +88,7 @@ def generate_response(text, risk, query_type=None):
         )
 
         response_text = response["output"]["message"]["content"][0]["text"].strip()
-        print(response_text)
+        #print(response_text)
         return response_text
 
     except Exception as e:

@@ -6,6 +6,7 @@ from services.file_service import extract_text, get_preview
 from services.risk_service import detect_risk
 from services.ai_service import generate_response
 from services.pdf_service import create_pdf
+from services.insights_service import generate_insights
 
 app = Flask(__name__)
 
@@ -56,6 +57,9 @@ def upload():
     # Detect risk
     risk = detect_risk(extracted_text)
 
+    # Generate insights based on risk level
+    insights = generate_insights(risk)
+
     # Generate AI response
     ai_response = generate_response(
         extracted_text,
@@ -73,6 +77,7 @@ def upload():
         risk_level=risk["level"],
         risk_keywords=risk["keywords"],
         risk_reasons=risk["reasons"],
+        insights=insights,
         filename=file.filename,
         preview=preview_text
     )

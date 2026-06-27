@@ -340,3 +340,23 @@ input[type=file]{
     margin-bottom:0;
 
 }
+
+#copyBtn{
+
+    min-width:170px;
+
+    transition:0.3s;
+
+}
+
+.card-header .btn{
+
+    font-weight:600;
+
+}
+
+.markdown-body{
+
+    font-size:1.05rem;
+
+}

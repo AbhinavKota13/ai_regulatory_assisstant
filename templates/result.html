@@ -198,13 +198,40 @@ RegPilot | AI Response
 
 <!-- AI REPORT -->
 
-<div class="card mt-4">
+<div class="card mt-4 shadow">
 
-    <div class="card-header bg-success text-white">
+    <div class="card-header bg-success text-white d-flex justify-content-between align-items-center flex-wrap">
 
-        <i class="bi bi-stars"></i>
+        <div>
 
-        AI Regulatory Report
+            <i class="bi bi-stars"></i>
+
+            <strong>AI Regulatory Report</strong>
+
+        </div>
+
+        <div class="mt-2 mt-md-0">
+
+            <button
+                class="btn btn-light btn-sm me-2"
+                id="copyBtn">
+
+                <i class="bi bi-clipboard"></i>
+
+                Copy Report
+
+            </button>
+
+            <a href="/download/{{ pdf_file }}"
+               class="btn btn-light btn-sm">
+
+                <i class="bi bi-download"></i>
+
+                PDF
+
+            </a>
+
+        </div>
 
     </div>
 
@@ -216,21 +243,9 @@ RegPilot | AI Response
 
 </div>
 
-
 <div class="text-center mt-4">
 
-    <a href="/download/{{ pdf_file }}"
-
-       class="btn btn-success btn-lg me-2">
-
-        <i class="bi bi-download"></i>
-
-        Download PDF
-
-    </a>
-
     <a href="/"
-
        class="btn btn-outline-primary btn-lg">
 
         <i class="bi bi-arrow-repeat"></i>
@@ -241,11 +256,10 @@ RegPilot | AI Response
 
 </div>
 
-
 <script>
 
 document.addEventListener("DOMContentLoaded", function () {
-    
+
     marked.setOptions({
         breaks: true,
         gfm: true
@@ -256,6 +270,42 @@ document.addEventListener("DOMContentLoaded", function () {
     const markdown = container.textContent.trim();
 
     container.innerHTML = marked.parse(markdown);
+
+    const copyButton = document.getElementById("copyBtn");
+
+    copyButton.addEventListener("click", async () => {
+
+        const report = document.getElementById("markdown-response").innerText;
+
+        try {
+
+            await navigator.clipboard.writeText(report);
+
+            copyButton.innerHTML =
+                '<i class="bi bi-check-circle-fill"></i> Copied!';
+
+            copyButton.classList.remove("btn-light");
+            copyButton.classList.add("btn-success");
+
+            setTimeout(() => {
+
+                copyButton.innerHTML =
+                    '<i class="bi bi-clipboard"></i> Copy Report';
+
+                copyButton.classList.remove("btn-success");
+                copyButton.classList.add("btn-light");
+
+            }, 2000);
+
+        }
+
+        catch (err) {
+
+            console.error(err);
+
+        }
+
+    });
 
 });
 

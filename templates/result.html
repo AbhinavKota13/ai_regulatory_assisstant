@@ -8,7 +8,7 @@ RegPilot | AI Response
 
 <!-- Success Banner -->
 
-<div class="alert alert-success shadow-sm mb-4">
+<div class="alert alert-success shadow-sm mb-4 upload-section">
 
     <i class="bi bi-check-circle-fill"></i>
 
@@ -23,7 +23,7 @@ RegPilot | AI Response
 </div>
 
 
-<div class="row g-4">
+<div class="row g-4 upload-section">    
 
     <!-- Uploaded Document -->
 
@@ -142,7 +142,7 @@ RegPilot | AI Response
 <!-- AI Insights -->
 
 
-<div class="card mt-4 mb-4">
+<div class="card mt-4 mb-4 insights-section">
 
     <div class="card-header bg-info text-white">
 
@@ -196,57 +196,71 @@ RegPilot | AI Response
 
 
 
-<!-- AI REPORT -->
 
-<div class="card mt-4 shadow">
+<div id = "print-area">
+    <!-- AI REPORT -->
+    <div class="card mt-4 shadow">
 
-    <div class="card-header bg-success text-white d-flex justify-content-between align-items-center flex-wrap">
+        <div class="card-header bg-success text-white d-flex justify-content-between align-items-center flex-wrap">
 
-        <div>
+            <div>
 
-            <i class="bi bi-stars"></i>
+                <i class="bi bi-stars"></i>
 
-            <strong>AI Regulatory Report</strong>
+                <strong>AI Regulatory Report</strong>
+
+            </div>
+
+            <div class="report-toolbar mt-2 mt-md-0">
+
+                <button
+                    class="btn btn-light btn-sm me-2"
+                    id="copyBtn">
+
+                    <i class="bi bi-clipboard"></i>
+
+                    Copy Report
+
+                </button>
+
+                <a href="/download/{{ pdf_file }}"
+                class="btn btn-light btn-sm">
+
+                    <i class="bi bi-download"></i>
+
+                    PDF
+
+                </a>
+
+                <button
+                    class="btn btn-light btn-sm ms-2"
+                    id="printBtn">
+
+                    <i class="bi bi-printer"></i>
+
+                    Print
+
+                </button>
+
+            </div>
 
         </div>
 
-        <div class="mt-2 mt-md-0">
+        <div class="card-body">
 
-            <button
-                class="btn btn-light btn-sm me-2"
-                id="copyBtn">
-
-                <i class="bi bi-clipboard"></i>
-
-                Copy Report
-
-            </button>
-
-            <a href="/download/{{ pdf_file }}"
-               class="btn btn-light btn-sm">
-
-                <i class="bi bi-download"></i>
-
-                PDF
-
-            </a>
+            <div id="markdown-response" class="markdown-body">{{ response }}</div>
 
         </div>
-
-    </div>
-
-    <div class="card-body">
-
-        <div id="markdown-response" class="markdown-body">{{ response }}</div>
 
     </div>
 
 </div>
 
-<div class="text-center mt-4">
+
+<div class="text-center mt-4 bottom-actions">
 
     <a href="/"
-       class="btn btn-outline-primary btn-lg">
+    class="btn btn-outline-primary btn-lg">
 
         <i class="bi bi-arrow-repeat"></i>
 
@@ -256,58 +270,152 @@ RegPilot | AI Response
 
 </div>
 
+
 <script>
 
-document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", function () {
 
-    marked.setOptions({
-        breaks: true,
-        gfm: true
-    });
+        marked.setOptions({
+            breaks: true,
+            gfm: true
+        });
 
-    const container = document.getElementById("markdown-response");
+        const container = document.getElementById("markdown-response");
 
-    const markdown = container.textContent.trim();
+        const markdown = container.textContent.trim();
 
-    container.innerHTML = marked.parse(markdown);
+        container.innerHTML = marked.parse(markdown);
 
-    const copyButton = document.getElementById("copyBtn");
+        const copyButton = document.getElementById("copyBtn");
 
-    copyButton.addEventListener("click", async () => {
+        copyButton.addEventListener("click", async () => {
 
-        const report = document.getElementById("markdown-response").innerText;
+            const report = document.getElementById("markdown-response").innerText;
 
-        try {
+            try {
 
-            await navigator.clipboard.writeText(report);
-
-            copyButton.innerHTML =
-                '<i class="bi bi-check-circle-fill"></i> Copied!';
-
-            copyButton.classList.remove("btn-light");
-            copyButton.classList.add("btn-success");
-
-            setTimeout(() => {
+                await navigator.clipboard.writeText(report);
 
                 copyButton.innerHTML =
-                    '<i class="bi bi-clipboard"></i> Copy Report';
+                    '<i class="bi bi-check-circle-fill"></i> Copied!';
 
-                copyButton.classList.remove("btn-success");
-                copyButton.classList.add("btn-light");
+                copyButton.classList.remove("btn-light");
+                copyButton.classList.add("btn-success");
 
-            }, 2000);
+                setTimeout(() => {
 
-        }
+                    copyButton.innerHTML =
+                        '<i class="bi bi-clipboard"></i> Copy Report';
 
-        catch (err) {
+                    copyButton.classList.remove("btn-success");
+                    copyButton.classList.add("btn-light");
 
-            console.error(err);
+                }, 2000);
 
-        }
+            }
+
+            catch (err) {
+
+                console.error(err);
+
+            }
+
+        });
 
     });
+    // ===========================
+    // PRINT REPORT
+    // ===========================
 
-});
+    const printBtn = document.getElementById("printBtn");
+
+    printBtn.addEventListener("click", () => {
+
+        const report = document.getElementById("markdown-response").innerHTML;
+
+        const printWindow = window.open("", "_blank");
+
+        printWindow.document.write(`
+            <html>
+            <head>
+
+                <title>RegPilot Report</title>
+
+                <link
+                    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+                    rel="stylesheet">
+
+                <style>
+
+                    body{
+
+                        padding:40px;
+                        font-family:Arial, sans-serif;
+
+                    }
+
+                    h1,h2,h3{
+
+                        margin-top:35px;
+
+                    }
+
+                    p{
+
+                        line-height:1.8;
+
+                    }
+
+                    ul,ol{
+
+                        margin-left:25px;
+
+                    }
+
+                    .report-title{
+
+                        border-bottom:3px solid #198754;
+                        margin-bottom:30px;
+                        padding-bottom:10px;
+
+                    }
+
+                </style>
+
+            </head>
+
+            <body>
+
+                <div class="report-title">
+
+                    <h2>RegPilot AI Regulatory Report</h2>
+
+                    <p>
+                        Generated using Amazon Nova
+                    </p>
+
+                </div>
+
+                ${report}
+
+            </body>
+
+            </html>
+        `);
+
+        printWindow.document.close();
+
+        printWindow.focus();
+
+        setTimeout(() => {
+
+            printWindow.print();
+
+            printWindow.close();
+
+        }, 500);
+
+    });
 
 </script>
 

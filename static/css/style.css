@@ -360,3 +360,69 @@ input[type=file]{
     font-size:1.05rem;
 
 }
+
+/* ==========================
+   RegPilot Notify
+========================== */
+
+#notification{
+
+    position:fixed;
+
+    top:25px;
+
+    right:25px;
+
+    width:320px;
+
+    background:rgba(31,41,55,.95);
+
+    backdrop-filter:blur(12px);
+
+    color:white;
+
+    border-radius:16px;
+
+    padding:18px;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.20);
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    opacity:0;
+
+    transform:translateX(120%);
+
+    transition:.35s ease;
+
+    z-index:9999;
+
+}
+
+#notification.show{
+
+    opacity:1;
+
+    transform:translateX(0);
+
+}
+
+#notification-icon{
+
+    font-size:26px;
+
+}
+
+#notification-message{
+
+    font-size:15px;
+
+    font-weight:500;
+
+    line-height:1.4;
+
+}

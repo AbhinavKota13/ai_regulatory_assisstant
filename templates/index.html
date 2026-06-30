@@ -41,31 +41,33 @@ RegPilot
 
             <label class="upload-label w-100">
 
-                <div class="drop-zone">
+                <div class="drop-zone" id="dropZone">
 
-                    <i class="bi bi-cloud-arrow-up"></i>
+                    <i class="bi bi-cloud-arrow-up" id="uploadIcon"></i>
 
-                    <h4 class="mt-3">
-
+                    <h4 class="mt-3" id="uploadTitle">
                         Drag & Drop your document
-
                     </h4>
 
-                    <p>
-
+                    <p id="uploadSubtitle">
                         or click anywhere to browse
-
                     </p>
 
-                    <small>
-
+                    <small id="uploadInfo">
                         PDF • DOCX • TXT
-
                     </small>
 
                 </div>
 
                 <input
+                    id="fileInput"
+                    type="file"
+                    name="file"
+                    required>
+
+                <input
+
+                    id="fileInput"
 
                     type="file"
 

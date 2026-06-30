@@ -68,12 +68,14 @@ body{
 
     border:none;
 
+    transition:.25s;
 }
 
 .btn-primary:hover{
 
     background:#1d4ed8;
 
+    transform:translateY(-2px);
 }
 
 .btn-secondary{
@@ -172,7 +174,7 @@ h1,h2,h3,h4,h5{
 
 .drop-zone i{
 
-    font-size:60px;
+    font-size:54px;
 
     color:#2563eb;
 
@@ -424,5 +426,122 @@ input[type=file]{
     font-weight:500;
 
     line-height:1.4;
+
+}
+
+/* ==========================================
+   Smart Upload Experience
+========================================== */
+
+.drop-zone{
+
+    transition:all .3s ease;
+
+}
+
+.drop-zone.ready{
+
+    border:2px solid #198754;
+
+    background:#f0fff4;
+
+}
+
+.drop-zone.ready i{
+
+    color:#198754;
+
+}
+
+.drop-zone.ready h4{
+
+    color:#198754;
+
+}
+
+
+/* ==========================================
+   PR-5.1 Upload Success Polish
+========================================== */
+
+#uploadTitle{
+
+    max-width:75%;
+    margin:12px auto 0;
+
+    word-break:break-word;
+    overflow-wrap:anywhere;
+
+    font-weight:600;
+    line-height:1.3;
+
+}
+
+#uploadIcon{
+
+    font-size:3rem;
+    margin-bottom:20px;
+
+}
+
+#uploadSubtitle{
+
+    margin-top:18px;
+
+}
+
+.upload-status{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    font-size:1.15rem;
+
+    font-weight:500;
+
+    color:#4b5563;
+
+}
+
+.upload-status i{
+
+    font-size:1rem;
+
+    color:#198754;
+
+}
+
+.upload-size{
+
+    margin-top:14px;
+
+    font-size:1rem;
+
+    color:#555;
+
+}
+
+#changeFileHint{
+
+    display:inline-block;
+
+    margin-top:16px;
+
+    font-size:.95rem;
+
+    font-weight:500;
+
+    color:#2563eb;
+
+    text-decoration:none;
+
+}
+
+#changeFileHint:hover{
+
+    text-decoration:underline;
 
 }

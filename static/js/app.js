@@ -72,6 +72,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     initializePrintButton();
 
+    initializeUploadArea();
+
 });
 
 
@@ -262,6 +264,78 @@ function initializePrintButton() {
             printWindow.close();
 
         }, 500);
+
+    });
+
+}
+
+// ==========================================
+// Smart Upload Experience
+// ==========================================
+
+function initializeUploadArea() {
+
+    const fileInput = document.getElementById("fileInput");
+    const dropZone = document.getElementById("dropZone");
+    const uploadIcon = document.getElementById("uploadIcon");
+    const uploadTitle = document.getElementById("uploadTitle");
+    const uploadSubtitle = document.getElementById("uploadSubtitle");
+    const uploadInfo = document.getElementById("uploadInfo");
+
+    if (!fileInput) return;
+
+    fileInput.addEventListener("change", function () {
+
+        if (!this.files.length) return;
+
+        const file = this.files[0];
+
+        const size =
+            file.size >= 1024 * 1024
+                ? (file.size / (1024 * 1024)).toFixed(2) + " MB"
+                : (file.size / 1024).toFixed(1) + " KB";
+
+        dropZone.classList.add("ready");
+
+        dropZone.animate(
+            [
+                { transform: "scale(.97)", opacity: .8 },
+                { transform: "scale(1)", opacity: 1 }
+            ],
+            {
+                duration:250,
+                easing:"ease-out"
+            }
+        );
+
+        uploadIcon.className =
+            "bi bi-file-earmark-check-fill text-success";
+
+        uploadTitle.textContent = file.name;  
+
+        uploadSubtitle.innerHTML = `
+        <span class="upload-status">
+            <i class="bi bi-check-circle-fill"></i>
+            Ready for AI Analysis
+        </span>
+        `;
+
+        uploadInfo.innerHTML = `
+        <div class="upload-size">
+            File Size: <strong>${size}</strong>
+        </div>
+
+        <a href="#" id="changeFileHint">
+            Change Selected File
+        </a>
+        `;
+
+        const changeHint = document.getElementById("changeFileHint");
+        changeHint.addEventListener("click", () => {
+
+            fileInput.click();
+
+        });
 
     });
 

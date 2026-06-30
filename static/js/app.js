@@ -331,8 +331,10 @@ function initializeUploadArea() {
         `;
 
         const changeHint = document.getElementById("changeFileHint");
-        changeHint.addEventListener("click", () => {
+        changeHint.addEventListener("click", (e) => {
 
+            e.preventDefault();
+            
             fileInput.click();
 
         });
